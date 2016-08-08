@@ -1,1 +1,0 @@
-/home/dgromov/.vimrc
