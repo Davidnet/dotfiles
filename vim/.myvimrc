@@ -1,233 +1,109 @@
-
 " General "{{{
 " Based on gmarik .vimrc
 set nocompatible               " be iMproved
-
 scriptencoding utf-8           " utf-8 all the way
 set encoding=utf-8
-
 set shiftround                 " round indent to multiple of 'shiftwidth'
-
+set wrap                       " wrap line visually
 set history=1000               " remember more commands and search history
 set undolevels=1000            " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                      " change the terminal's title
-
 set pastetoggle=<F2>          " toggle between paste and normal: for 'safer' pasting from keyboard
 set modeline
 set modelines=5                " default numbers of lines to read for modeline instructions
-
 set autoread
-
 set hlsearch                   " highlight search
 set ignorecase                 " be case insensitive when searching
 set smartcase                  " be case sensitive when input has a capital letter
 set incsearch                  " show matches while typing
-
 let g:is_posix = 1             " vim's default is archaic bourne shell, bring it up to the 90s
 " "}}}
-
 " Formatting "{{{
 set tabstop=4                  " tab size eql 4 spaces
 set softtabstop=4
 set shiftwidth=4               " default shift width for indents
 set expandtab                  " replace tabs with ${tabstop} spaces
-set smarttab		       " Oh god the war, of tabs and spaces see a vimdoc
-
+set smarttab                   " Oh god the war, of tabs and spaces see a vimdoc
 set backspace=indent
 set backspace+=eol
-set backspace+=start	       " See http://vim.wikia.com/wiki/Backspace_and_delete_problems
-
+set backspace+=start           " See http://vim.wikia.com/wiki/Backspace_and_delete_problems
 set autoindent
+set copyindent
+set clipboard^=unnamedplus
 " "}}}
-
 " Visual "{{{
 syntax on                      " enable syntax
-
 set mousehide                 " Hide mouse after chars typed
-
 set number                    " line numbers On
 set showmatch                 " Show matching brackets.
-
 set list                      " display unprintable characters f12 - switches
 set listchars=tab:\ ·,eol:¬
 set listchars+=trail:·
 set listchars+=extends:»,precedes:«
 map <silent> <F12> :set invlist<CR>
-
 set laststatus=2
+nnoremap <C-R> :let @/=""<CR><C-R>
 " "}}}
-
-" Scripts and Plugins " {{{
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle
-
-" tmux
-Plugin 'christoomey/vim-tmux-navigator'
-
-" gotham colorscheme
-Plugin 'whatyouhide/vim-gotham'
-
-" vimairline and themes.
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 1 " Smarter tab line
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
-" The easymotion project
-Plugin 'easymotion/vim-easymotion'
-"
-" The Git Gutter to see any changes in git VCS projects
-Plugin 'airblade/vim-gitgutter'
-set updatetime=250
-
-" taboo for renaming tabs
-Plugin 'gcmt/taboo.vim'
-set sessionoptions+=tabpages,globals
-
-" Support for csv files (Read the Documentation!)
-Plugin 'chrisbra/csv.vim'
-
-" Unite for Vim
-Plugin 'Shougo/unite.vim'
-"
-" tmux file soruce
-Bundle 'wellle/tmux-complete.vim'
-
-
-" Tabular
-Plugin 'godlygeek/tabular'
-
-" Julia language for vim
-Plugin 'JuliaLang/julia-vim'
-" Cryptol for vim
-Plugin 'victoredwardocallaghan/cryptol.vim'
-" LaTeX for vim
-Plugin 'lervag/vimtex'
-" Neocomplete
-Plugin 'Shougo/neocomplete'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" " }}}
-colorscheme gotham256        " By some strange reason colorscheme should be loaded after.
-nnoremap <Leader>f :Unite file<CR>
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-command! -nargs=* Stab call Stab()
-function! Stab()
-  let l:tabstop = 1 * input('set shiftwidth=')
-
-  if l:tabstop > 0
-    " do we want expandtab as well?
-    let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
-    if l:expandtab == 3
-      " abort?
-      return
-    endif
-
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-
-    if l:expandtab == 1
-      setlocal expandtab
-    else
-      setlocal noexpandtab
-    endif
-  endif
-
-  " show the selected options
-  try
-    echohl ModeMsg
-    echon 'set tabstop='
-    echohl Question
-    echon &l:ts
-    echohl ModeMsg
-    echon ' shiftwidth='
-    echohl Question
-    echon &l:sw
-    echohl ModeMsg
-    echon ' sts='
-    echohl Question
-    echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
-    echohl ModeMsg
-    echon 'expandtab'
-  finally
-    echohl None
-  endtry
-endfunction
-" NeoComplete settings {{{
-" Use neocomplete
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+" Plugin {{{
+call plug#begin('~/.vim/plugged')
+" align stuff
+Plug 'junegunn/vim-easy-align'
+" easy motion on rule
+Plug 'easymotion/vim-easymotion'
+" adding tmux.conf syntax checker
+Plug 'tmux-plugins/vim-tmux'
+" adding commenting stuff
+Plug 'scrooloose/nerdcommenter'
+" adding Jedi-Vim
+Plug 'davidhalter/jedi-vim'
+" vim current word
+Plug 'dominikduda/vim_current_word'
+" Plug to align stuff and Tabular
+Plug 'godlygeek/tabular'
+" Plug to supertab
+Plug 'ervandew/supertab'
+" vim-airline theme installation
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Vim gutter git
+Plug 'airblade/vim-gitgutter'
+" Adding vim-conda
+Plug 'cjrh/vim-conda'
+" startuptime log
+Plug 'tweekmonster/startuptime.vim'
+" undotree
+Plug 'mbbill/undotree'
+" Adding tmux navigation
+Plug 'christoomey/vim-tmux-navigator'
+" vim HTML design
+Plug 'mattn/emmet-vim'
+" vim for coconut
+Plug 'manicmaniac/coconut.vim'
+" Initialize plugin system
+call plug#end()
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Jump to anywhere you want with minimal keystrokes, with just one key binding
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" jedi-vim use tabs when going to a definition etc:
+let g:jedi#use_tabs_not_buffers = 1
+" Disable vim-conda messages
+let g:conda_startup_msg_suppress = 1
+" remap for undotree
+nnoremap <F5> :UndotreeToggle<cr>
+" Set persistent undo 
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" }}}
