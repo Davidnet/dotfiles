@@ -1,0 +1,7 @@
+{
+    "vim.camelCaseMotion.enable": true,
+    "vim.useSystemClipboard": true,
+    "vim.easymotion": true,
+    "workbench.colorTheme": "One Dark Pro Monokai Darker",
+    "editor.renderWhitespace": "all"
+}
