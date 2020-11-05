@@ -1,7 +1,61 @@
 {
+    "workbench.iconTheme": "material-icon-theme",
     "vim.camelCaseMotion.enable": true,
     "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": false,
+    "vim.foldfix": true,
     "vim.easymotion": true,
-    "workbench.colorTheme": "One Dark Pro Monokai Darker",
-    "editor.renderWhitespace": "all"
+    "[python]": {
+        "editor.formatOnSave": true
+    },
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/home/dgromov/.local/bin/black",
+    "python.linting.flake8Path": "/home/dgromov/.local/bin/flake8",
+    "editor.renderWhitespace": "trailing",
+    "dart.previewFlutterUiGuides": true,
+    "[dart]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.suggest.insertMode": "replace",
+        "editor.formatOnSave": true,
+        "editor.wordWrap": "on",
+    },
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.wordWrap": "on",
+    },
+    "window.zoomLevel": 2,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.hg/store/**": true,
+        "**/.venv/**": true
+    },
+    "remote.containers.dockerPath": "podman",
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "extensions.ignoreRecommendations": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.languageServer": "Pylance",
+    "git.autofetch": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "material-icon-theme.folders.associations": {
+        "global_state": "global",
+        "ui": "layout",
+        "bloc": "controller",
+    },
+    "workbench.colorCustomizations": {
+        "[Material Theme Darker High Contrast]": {
+            "statusBar.debuggingBackground": "#212121"
+        }
+    },
+    "editor.fontFamily": "Fira Code Retina",
+    "editor.fontLigatures": true,
+    "shellcheck.run": "onSave",
+    "python.dataScience.askForKernelRestart": false,
 }
