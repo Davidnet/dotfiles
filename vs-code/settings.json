@@ -1,61 +1,56 @@
 {
-    "workbench.iconTheme": "material-icon-theme",
-    "vim.camelCaseMotion.enable": true,
-    "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": false,
-    "vim.foldfix": true,
-    "vim.easymotion": true,
+    "editor.suggestSelection": "first",
+    "editor.renderWhitespace": "trailing",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.formatting.provider": "black",
     "[python]": {
         "editor.formatOnSave": true
     },
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/home/dgromov/.local/bin/black",
-    "python.linting.flake8Path": "/home/dgromov/.local/bin/flake8",
-    "editor.renderWhitespace": "trailing",
-    "dart.previewFlutterUiGuides": true,
-    "[dart]": {
-        "editor.tabSize": 2,
-        "editor.insertSpaces": true,
-        "editor.detectIndentation": false,
-        "editor.suggest.insertMode": "replace",
-        "editor.formatOnSave": true,
-        "editor.wordWrap": "on",
-    },
-    "[shellscript]": {
-        "files.eol": "\n",
-        "editor.wordWrap": "on",
-    },
-    "window.zoomLevel": 2,
+    "python.languageServer": "Pylance",
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/node_modules/**": true,
         "**/.hg/store/**": true,
-        "**/.venv/**": true
+        "**/.venv/**":true,
+    },
+    "vim.useCtrlKeys": false,
+    "vim.easymotion": true,
+    "vim.camelCaseMotion.enable": true,
+    "vim.useSystemClipboard": true,
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
     },
     "remote.containers.dockerPath": "podman",
-    "workbench.colorTheme": "Material Theme Darker High Contrast",
-    "extensions.ignoreRecommendations": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.languageServer": "Pylance",
     "git.autofetch": true,
-    "[html]": {
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "dart.previewFlutterUiGuidesCustomTracking": true,
-    "material-icon-theme.folders.associations": {
-        "global_state": "global",
-        "ui": "layout",
-        "bloc": "controller",
-    },
-    "workbench.colorCustomizations": {
-        "[Material Theme Darker High Contrast]": {
-            "statusBar.debuggingBackground": "#212121"
+    "tabnine.experimentalAutoImports": true,
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
         }
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.fontFamily": "Fira Code Retina",
-    "editor.fontLigatures": true,
-    "shellcheck.run": "onSave",
-    "python.dataScience.askForKernelRestart": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "workbench.colorTheme": "Default Light+",
 }
